@@ -1,0 +1,144 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: sans-serif;
+}
+.emptyPage {
+  display: flex;
+  justify-content: center;
+}
+.Header {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 0px 0px 15px;
+  box-shadow: 5px 10px 10px #dfdfdf;
+}
+
+.ToDos {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: auto;
+  transition: 2s;
+}
+.ToDo {
+  background: lightblue;
+  text-align: left;
+  width: 15em;
+  height: 12em;
+  border-radius: 20px;
+  border: 2px solid rgb(80, 170, 200);
+  padding: 1.5em;
+  margin: 20px;
+  box-shadow: 5px 10px 18px #98d1d8;
+  transition: all 0.5s;
+}
+.ToDo:hover {
+  width: 16em;
+  height: 13em;
+  opacity: 0.75;
+}
+.ToDo-state-enter {
+  opacity: 0;
+  transform: translateY(-25%);
+}
+.ToDo-state-enter-active {
+  opacity: 1;
+  transform: translateY(-0%);
+  transition: 2s;
+}
+.ToDo-state-exit {
+  opacity: 1;
+  transform: translateY(-0%);
+  transition: 1s;
+}
+.ToDo-state-exit-active {
+  opacity: 0;
+  transform: translateY(-25%);
+  transition: 1s;
+}
+.AddButton {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  cursor: pointer;
+  height: 1.3em;
+  width: 1.5em;
+  border-radius: 10px;
+  border: 2px solid black;
+  font-size: 30px;
+  box-shadow: 5px 10px 18px #adadad;
+  transition: 0s;
+}
+.AddButton:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+.AddTaskButton-enter {
+  transform: translateY(-500%);
+}
+.AddTaskButton-enter-active {
+  transform: translateY(0%);
+  transition: 1s;
+}
+.AddTaskButton-exit {
+  transform: translateY(0%);
+}
+.AddTaskButton-exit-active {
+  transform: translateY(-610%);
+  transition: 3s;
+}
+
+.submitButton {
+  background: lightgrey;
+  border: solid 1px black;
+  border-radius: 3px;
+  margin: 0 40%;
+  font-size: 15px;
+}
+.submitButton:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+.AddTask {
+  width: 250px;
+  padding: 20px 20px 20px 20px;
+  border: 2px solid black;
+  border-radius: 15px;
+  margin: 2em 38% 0.5em 38%;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 5px 10px 18px #adadad;
+}
+.AddTask-show-enter {
+  opacity: 0;
+  transform: translateY(-25%);
+}
+.AddTask-show-enter-active {
+  opacity: 1;
+  transform: translateY(-0%);
+  transition: 2s;
+}
+.AddTask-show-exit {
+  opacity: 1;
+  transform: translateY(-0%);
+  transition: 1s;
+}
+.AddTask-show-exit-active {
+  opacity: 0;
+  transform: translateY(-25%);
+}
+
+.NewTask {
+  padding: 10px;
+}
+
+.check {
+  height: 50px;
+  width: 50px;
+  background-color: red;
+}
