@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddTask = ({ createTask, open }) => {
+const AddTask = ({ createTask }) => {
   const [text, setText] = useState("");
   const [time, setTime] = useState("");
   const [description, setDescription] = useState("");
@@ -22,6 +22,7 @@ const AddTask = ({ createTask, open }) => {
     }
     createTask({ text, time, description });
 
+    //Clean palate for new tasks
     setText("");
     setTime("");
     setDescription("");

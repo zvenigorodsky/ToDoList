@@ -18,7 +18,7 @@ function App() {
       setTasks(res.tasks.map((task) => task));
     }
     fetchData();
-  }, []);
+  }, [setTasks]);
 
   //Button configuration
   const onClick = () => {
@@ -26,15 +26,29 @@ function App() {
   };
 
   //Deleting Tasks
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+  const deleteTask = async (id) => {
+    const res = await fetch(`/api/v1/tasks/${id}`, { method: "DELETE" }).then(
+      (res) => res.json()
+    );
+    alert(`${res.msg}`);
   };
 
   //Creating Tasks
-  const createTask = (task) => {
-    const id = Math.floor(Math.random() * 10000) + 1;
-    const newTask = { id, ...task };
-    setTasks([...tasks, newTask]);
+  const createTask = async (task) => {
+    console.log(task.text);
+    const res = await fetch("/api/v1/tasks", {
+      method: "POST",
+      header: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: `${task.text}`,
+        description: `${task.description}`,
+        time: `${task.time}`,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => setTasks([...tasks, data]))
+      .catch((err) => console.log(err));
+    alert(`${res.msg}`);
   };
 
   return (
