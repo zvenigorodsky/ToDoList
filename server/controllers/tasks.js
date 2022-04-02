@@ -6,10 +6,8 @@ const getTasks = async (req, res) => {
 };
 
 const createTask = async (req, res) => {
-  console.log(req.body);
   const task = await Task.create(req.body);
-  console.log(task);
-  res.status(201).json({ success: true, task: task });
+  res.status(201).json({ msg: `"${task.title}" has been created`, task: task });
 };
 
 const getOneTask = async (req, res) => {
@@ -22,9 +20,21 @@ const deleteTask = async (req, res) => {
   const { id: taskID } = req.params;
   const task = await Task.findByIdAndDelete({ _id: taskID });
   if (!task) {
-    return res.status(404).json({ msg: `There is no task with such name` });
+    return res.status(404).json({ msg: `There is no such task` });
   }
   res.status(200).json({ task: null, msg: `"${task.title}" has been deleted` });
 };
 
-module.exports = { getTasks, createTask, getOneTask, deleteTask };
+const updateTask = async (req, res) => {
+  const { id: taskID } = req.params;
+  const task = await Task.findByIdAndUpdate({ _id: taskID }, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  if (!task) {
+    return res.status(404).json({ msg: `There is no such task` });
+  }
+  res.status(200).json({ task, msg: `${task.title} has been updated` });
+};
+
+module.exports = { getTasks, createTask, getOneTask, deleteTask, updateTask };

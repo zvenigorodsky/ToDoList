@@ -6,14 +6,12 @@ const mongoose = require("mongoose");
 
 const tasksRoute = require("./routes/tasks");
 const notFound = require("./middleware/notFound");
-const errorMiddleware = require("./middleware/error-handler");
 
 app.use(express.json());
 
 app.use("/api/v1/tasks", tasksRoute);
 
 app.use(notFound);
-app.use(errorMiddleware);
 
 const port = process.env.PORT || 3001;
 

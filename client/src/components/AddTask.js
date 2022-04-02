@@ -20,7 +20,7 @@ const AddTask = ({ createTask }) => {
       alert("You didn't enter any description");
       return;
     }
-    createTask({ text, time, description });
+    createTask({ text, description, time });
 
     //Clean palate for new tasks
     setText("");

@@ -10,15 +10,15 @@ import "./index.css";
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState({});
+  const [fetchSwitch, setFetchSwitch] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       const res = await fetch("/api/v1/tasks").then((res) => res.json());
-
       setTasks(res.tasks.map((task) => task));
     }
     fetchData();
-  }, [setTasks]);
+  }, [fetchSwitch]);
 
   //Button configuration
   const onClick = () => {
@@ -30,15 +30,17 @@ function App() {
     const res = await fetch(`/api/v1/tasks/${id}`, { method: "DELETE" }).then(
       (res) => res.json()
     );
+    setFetchSwitch(!fetchSwitch);
     alert(`${res.msg}`);
   };
 
   //Creating Tasks
   const createTask = async (task) => {
-    console.log(task.text);
     const res = await fetch("/api/v1/tasks", {
       method: "POST",
-      header: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         title: `${task.text}`,
         description: `${task.description}`,
@@ -46,8 +48,8 @@ function App() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => setTasks([...tasks, data]))
       .catch((err) => console.log(err));
+    setFetchSwitch(!fetchSwitch);
     alert(`${res.msg}`);
   };
 
