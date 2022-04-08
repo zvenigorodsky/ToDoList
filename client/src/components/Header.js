@@ -1,7 +1,10 @@
+import { Outlet } from "react-router-dom";
+
 const Header = ({ title }) => {
   return (
-    <div className="Header">
-      <h1>{title}</h1>
+    <div >
+      <h1 className="Header">{title}</h1>
+      <Outlet/>
     </div>
   );
 };
