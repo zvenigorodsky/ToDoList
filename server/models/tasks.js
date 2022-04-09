@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 const taskSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    required: [true, 'Enter a valid title'],
     unique: true,
   },
   description: {
     type: String,
-    required: true,
+    required: [true, 'Enter a valid description'],
   },
   time: {
     type: String,
-    required: true,
+    required: [true, 'Enter a valid time'],
   },
 });
 

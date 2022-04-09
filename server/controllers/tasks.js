@@ -25,16 +25,17 @@ const deleteTask = async (req, res) => {
   res.status(200).json({ task: null, msg: `"${task.title}" has been deleted` });
 };
 
-const updateTask = async (req, res) => {
+const updateTask = async (req, res, next ) => {
   const { id: taskID } = req.params;
-  const task = await Task.findByIdAndUpdate({ _id: taskID }, req.body, {
+  try{
+    const task = await Task.findByIdAndUpdate({ _id: taskID }, req.body, {
     new: true,
     runValidators: true,
   });
-  if (!task) {
-    return res.status(404).json({ msg: `There is no such task` });
+    res.status(200).json({ task, msg: `${task.title} has been updated` });
+  }catch(err){
+    next(err);
   }
-  res.status(200).json({ task, msg: `${task.title} has been updated` });
 };
 
 module.exports = { getTasks, createTask, getOneTask, deleteTask, updateTask };

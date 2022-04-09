@@ -22,7 +22,8 @@ export default function UpdateTask () {
 
     const onSubmit = async (e) =>{
         e.preventDefault();
-        const res = await fetch(`/api/v1/tasks/${params._id}`,{ 
+        try{
+            const res = await fetch(`/api/v1/tasks/${params._id}`,{ 
             method:"PATCH",
             headers:{
                 'Content-Type':'application/json',
@@ -31,9 +32,17 @@ export default function UpdateTask () {
                 title:`${title}`,
                 description:`${description}`,
                 time:`${time}`,
-            }), }).then(res=>res.json()).catch(err=>console.log(err));
+            }), }).then(res=>res.json());
+            if(res.msg instanceof Object){
+                throw res.msg  
+            }
             alert(`${res.msg}`);
             navigate('/',{ replace: true });
+        } catch(err){
+            err.title && alert(`${err.title}`);
+            err.time && alert(`${err.time}`);
+            err.description && alert(`${err.description}`);
+        }
     }
 
     return(
